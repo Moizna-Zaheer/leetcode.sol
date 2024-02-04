@@ -1,0 +1,17 @@
+class Solution:
+    def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
+        leftIdx, subarraySum, subarrayCount = 0, 0, 0
+
+        for rightIdx in range(len(arr)):
+
+            # close window
+            if rightIdx - leftIdx + 1 > k:
+                subarraySum -= arr[leftIdx]
+                leftIdx += 1
+
+            # open window
+            subarraySum += arr[rightIdx]
+            if ((rightIdx - leftIdx + 1) == k) and (subarraySum / k) >= threshold:
+                subarrayCount += 1
+        return subarrayCount
+        

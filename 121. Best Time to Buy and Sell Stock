@@ -1,0 +1,41 @@
+# class Solution:
+#     def maxProfit(self, prices: List[int]) -> int:
+#         left = 0
+#         right = 0 
+#         maxProfit = 0
+
+#         while left < len(prices):
+#             if prices[left] < prices[right]:
+#                 profit = prices[right] - prices[left]
+#                 maxProfit = max(maxProfit,profit)
+#             else:
+#                 left = right
+#                 right += 1
+
+#         return maxProfit             
+
+            # Time Limit Exceeded in this two pointer approach
+
+
+
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        
+        min_price = prices[0]
+        max_profit = 0
+        
+        for price in prices[1:]:
+            if price < min_price:
+                min_price = price
+            else:
+                max_profit = max(max_profit, price - min_price)
+        
+        return max_profit
+
+#   time complexity of O(n)
+
+#  traverse the list once while keeping track of the minimum price seen so far and updating the maximum profit accordingly

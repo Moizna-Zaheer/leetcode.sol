@@ -1,0 +1,19 @@
+# class Solution:
+#     def runningSum(self, nums: List[int]) -> List[int]:
+#         lenght = len(nums)
+
+#         while i in range(1, lenght):
+#             nums[i]+= nums[i-1]
+
+#         return nums     
+
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
+        length = len(nums)
+
+        for i in range(1, length):  # Fix the typo in 'length' and use a for loop
+            nums[i] += nums[i-1]  # Update each element to be the running sum
+        
+        return nums
+
+        

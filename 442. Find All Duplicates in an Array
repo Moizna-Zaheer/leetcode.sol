@@ -1,0 +1,27 @@
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        nums.sort()
+        output = []
+
+        for i in range(1, len(nums)) :
+            if nums[i] == nums[i -1 ]:
+                output.append(nums[i])
+
+        return output     
+
+
+
+
+### Time Limit Exceeded
+# class Solution:
+#     def findDuplicates(self, nums: List[int]) -> List[int]:
+#         left = 0 
+#         right = len(nums)-1
+#         output = []
+
+#         while left <= right :
+#             if nums[left] == nums[right]:
+#                 output.append(left)
+#                 left += 1
+#                 right -= 1
+#         return output

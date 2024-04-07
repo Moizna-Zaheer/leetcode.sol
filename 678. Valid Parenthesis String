@@ -1,0 +1,66 @@
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        leftmin = 0  # Minimum number of open '(' needed
+        leftmax = 0  # Maximum number of open '(' possible
+
+        for c in s:
+            if c == '(':
+                leftmin += 1
+                leftmax += 1
+            elif c == '*':
+                leftmin -= 1  # Best case, '*' acts as ')'
+                leftmax += 1  # Worst case, '*' acts as '('
+            elif c == ')':
+                leftmin -= 1  # Need one less '('
+                leftmax -= 1  # One ')' used to close '('
+            else:
+                # This block is unnecessary, as input contains only '(', ')', and '*'
+                pass
+
+            if leftmax < 0:  # More ')' than '(' + '*'
+                return False
+
+            if leftmin < 0:  # '*' can act as '(' if we have more ')' so far
+                leftmin = 0
+
+        # If leftmin is 0, all '(' have been closed correctly. leftmax is irrelevant here
+        return leftmin == 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# not accepeted by all testcases 
+# class Solution:
+#     def checkValidString(self, s: str) -> bool:
+#         leftmin = 0
+#         leftmax = 0
+        
+#         for c in s:
+#             if c == '(':
+#                 leftmin = +1
+#                 leftmax = +1
+#             elif c!= ')':
+#                 leftmin = -1
+#                 leftmax = -1
+#             else :
+#                 leftmin = -1
+#                 leftmax = +1
+
+#             if leftmax < 0 :
+#                 return False 
+
+#             if leftmin < 0:
+#                 leftmin = 0
+
+#             return leftmin 

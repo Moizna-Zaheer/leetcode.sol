@@ -1,0 +1,47 @@
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        stack = []
+        for c in num:
+            while k > 0 and stack and stack[-1] > c:
+                k -= 1
+                stack.pop()
+            stack.append(c)
+
+        # Final stack adjustment if k > 0
+        final_stack = stack[:len(stack) - k] if k else stack
+
+        # Create the result string by joining characters in the final stack
+        res = "".join(final_stack)
+
+        # Remove leading zeros manually without converting to int
+        i = 0
+        while i < len(res) - 1 and res[i] == '0':
+            i += 1
+        res = res[i:]
+
+        # Return "0" if result is empty after removal of leading zeros
+        return res if res else "0"
+
+
+
+
+
+
+# The error arises because Python limits the number of digits (4300 by default) for string-to-integer conversions, and your string has 9001 digits. Instead of changing system limits, which may not be allowed in your environment, you can bypass integer conversion by directly manipulating the string to remove leading zeros. This approach avoids the error and ensures compatibility with large inputs.
+# class Solution:
+#     def removeKdigits(self, num: str, k: int) -> str:
+#         stack = []
+#         for c in num:
+#             while k > 0 and stack and stack[-1] > c:
+#                 k -= 1
+#                 stack.pop()
+#             stack.append(c)
+        
+#         # Adjust the stack to account for any remaining removals.
+#         stack = stack[:len(stack) - k]
+
+#         # Join all elements in stack to form the resultant number.
+#         res = "".join(stack)
+
+#         # Convert result to integer to remove leading zeros, then back to string.
+#         return str(int(res)) if res else "0"
